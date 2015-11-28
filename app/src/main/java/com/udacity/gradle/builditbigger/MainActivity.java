@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.util.Pair;
 
@@ -44,7 +45,15 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        findViewById(R.id.jokeLoadBar).setVisibility(View.INVISIBLE);
+    }
+
     public void tellJoke(View view){
+
+        findViewById(R.id.jokeLoadBar).setVisibility(View.VISIBLE);
         new EndpointsAsyncTask().execute(new Pair<Context, Integer>(this, 1));
 
 }
