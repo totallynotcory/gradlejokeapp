@@ -17,17 +17,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors{
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Added for AdMob
+    compile 'com.google.android.gms:play-services-ads:8.3.0'
     // Jokes are provided by the joketeller jar
     compile project(':joketeller')
     compile project(':jokepage')
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
     compile project(path: ':jokebackend', configuration: 'android-endpoints')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    testCompile 'junit:junit:4.12'
 }
 
 sourceCompatibility = 1.7

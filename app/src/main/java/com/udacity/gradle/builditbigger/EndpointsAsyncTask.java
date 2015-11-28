@@ -14,12 +14,12 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Pair<Context, Integer>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Pair<Context, Integer>... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://joke-server-1143.appspot.com/_ah/api/");
@@ -29,10 +29,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         }
 
         context = params[0].first;
-        String name = params[0].second;
+        int jokeNum = params[0].second;
 
         try {
-            return myApiService.returnJoke().execute().getData();
+            return myApiService.returnJoke(jokeNum).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
