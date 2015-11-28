@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">jokePage</string>
+
+
+    <string name="joke_loader_not_working">Joke isn\'t loading properly</string>
+
+
+    <string name="action_settings">Settings</string>
+</resources>
