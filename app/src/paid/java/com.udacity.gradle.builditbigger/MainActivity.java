@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.util.Pair;
 
-import com.corypotwin.jokeGenerator;
 import com.corypotwin.jokepage.JokeActivity;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AsyncResponse{
+
+    InterstitialAd mInterstitialAd;
+    private String mJoke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,10 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -49,14 +50,41 @@ public class MainActivity extends ActionBarActivity {
     public void onResume(){
         super.onResume();
         findViewById(R.id.jokeLoadBar).setVisibility(View.INVISIBLE);
+
+        // Load a new Joke whenever we come back to the Main Activity.
+        new EndpointsAsyncTask().execute(new Pair<AsyncResponse, Integer>(this, 1));
     }
 
+    /**
+     * Sets the load bar and launches the intent
+     * @param view
+     */
     public void tellJoke(View view){
-
         findViewById(R.id.jokeLoadBar).setVisibility(View.VISIBLE);
-        new EndpointsAsyncTask().execute(new Pair<Context, Integer>(this, 1));
+        if(mJoke != null){
+            launchJokeIntent();
+        }
+    }
+
+    /**
+     * Launches the jokes intent
+     */
+    private void launchJokeIntent(){
+        Intent jokeIntent = new Intent(this, JokeActivity.class);
+        jokeIntent.putExtra("joke", mJoke);
+        this.startActivity(jokeIntent);
+    }
+
+    /**
+     * when the Async task has finished, put the joke to mJoke
+     * @param output string returned from asynctask
+     */
+    @Override
+    public void processFinish(String output){
+        mJoke = output;
+    }
+
 
 }
 
 
-}
