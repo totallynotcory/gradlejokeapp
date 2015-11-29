@@ -1,8 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import com.corypotwin.finalproject.jokebackend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -10,12 +8,15 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<AsyncResponse, Integer>, Void, String> {
+/**
+ * AsyncTask used to retrieve jokes from the joke server.
+ */
+class EndpointsAsyncTask extends AsyncTask<AsyncResponse, Void, String> {
     private static MyApi myApiService = null;
     private AsyncResponse callingActivity;
 
     @Override
-    protected String doInBackground(Pair<AsyncResponse, Integer>... params) {
+    protected String doInBackground(AsyncResponse... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://joke-server-1143.appspot.com/_ah/api/");
@@ -24,11 +25,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<AsyncResponse, Integer>, Void, S
             myApiService = builder.build();
         }
 
-        callingActivity = params[0].first;
-        int jokeNum = params[0].second;
+        callingActivity = params[0];
 
         try {
-            return myApiService.returnJoke(jokeNum).execute().getData();
+            return myApiService.returnJoke().execute().getData();
         } catch (IOException e) {
             return null;
         }

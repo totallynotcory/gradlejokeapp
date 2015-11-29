@@ -65,10 +65,11 @@ public class MainActivity extends ActionBarActivity implements AsyncResponse{
     @Override
     public void onResume(){
         super.onResume();
+        // When we come back to this activity, hide the load bar
         findViewById(R.id.jokeLoadBar).setVisibility(View.INVISIBLE);
 
         // Load a new Joke whenever we come back to the Main Activity.
-        new EndpointsAsyncTask().execute(new Pair<AsyncResponse, Integer>(this, 1));
+        new EndpointsAsyncTask().execute(this);
     }
 
     /**
@@ -90,7 +91,6 @@ public class MainActivity extends ActionBarActivity implements AsyncResponse{
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("B8480992F05E260480B83EF57ECC9DD2")
                 .build();
 
         mInterstitialAd.loadAd(adRequest);

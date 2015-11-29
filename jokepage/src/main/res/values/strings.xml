@@ -2,7 +2,7 @@
     <string name="app_name">jokePage</string>
 
     <string name="joke_loader_not_working">I wondered why the frisbee was getting bigger, and then it hit me.</string>
-    <string name="no_network">Heard this one before?  Come back when you\'ve got a proper connection!</string>
+    <string name="no_network">Heard this one before?  Come back when you\'ve got a proper internet connection!</string>
     <string name="user_too_fast">Come back in a bit for a new one!</string>
     <string name="action_settings">Settings</string>
 </resources>

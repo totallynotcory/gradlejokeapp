@@ -31,7 +31,7 @@ public class AsyncTaskTest extends InstrumentationTestCase implements AsyncRespo
      * @throws Throwable
      */
     public final void testSuccessfulFetch() throws Throwable {
-        new EndpointsAsyncTask().execute(new Pair<AsyncResponse, Integer>(this, 1));
+        new EndpointsAsyncTask().execute(this);
         }
 
     /**

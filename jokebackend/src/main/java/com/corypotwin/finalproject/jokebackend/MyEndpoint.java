@@ -28,12 +28,11 @@ public class MyEndpoint {
 
     /** A simple endpoint method that returns a joke from the jokeGenerator library*/
     @ApiMethod(name = "returnJoke")
-    public MyBean returnJoke(@Named("jokeNum") int jokeNum) {
+    public MyBean returnJoke() {
         MyBean response = new MyBean();
-        String jokeResponse = jokeGenerator.tellJoke(jokeNum);
+        String jokeResponse = jokeGenerator.tellJoke();
         response.setData(jokeResponse);
 
         return response;
     }
-
 }

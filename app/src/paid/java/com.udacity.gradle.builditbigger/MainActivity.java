@@ -1,22 +1,17 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.util.Pair;
 
 import com.corypotwin.jokepage.JokeActivity;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+
 
 public class MainActivity extends ActionBarActivity implements AsyncResponse{
 
-    InterstitialAd mInterstitialAd;
     private String mJoke;
 
     @Override
@@ -49,10 +44,11 @@ public class MainActivity extends ActionBarActivity implements AsyncResponse{
     @Override
     public void onResume(){
         super.onResume();
+        // When we come back to this activity, hide the load bar
         findViewById(R.id.jokeLoadBar).setVisibility(View.INVISIBLE);
 
         // Load a new Joke whenever we come back to the Main Activity.
-        new EndpointsAsyncTask().execute(new Pair<AsyncResponse, Integer>(this, 1));
+        new EndpointsAsyncTask().execute(this);
     }
 
     /**
