@@ -17,3 +17,25 @@ allprojects {
         jcenter()
     }
 }
+
+// Little help from the Udacity forums on this one.
+task runServerBackedTests{
+    description("Launch GCE local dev environment, runs Android tests, then shuts down the environment")
+
+    evaluationDependsOn ":jokebackend"
+    project(":jokebackend"){
+        appengine{
+            daemon true
+        }
+    }
+
+    dependsOn = [":jokebackend:appengineRun", ":app:connectedAndroidTest"]
+
+    tasks.getByPath(":jokebackend:appengineRun").mustRunAfter(tasks.getByPath(":app:connectedAndroidTest"))
+    finalizedBy tasks.getByPath(":jokebackend:appengineStop")
+
+    doLast{
+        println "Tests Complete, Server Shutdown."
+    }
+}
+

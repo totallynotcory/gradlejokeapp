@@ -9,9 +9,10 @@ import android.util.Pair;
 
 
 /**
+ * Test to ensure the AsyncTaskTest returns a non-null string.
+ *
  * Created by ctpotwin on 11/28/15.
  */
-
 
 public class AsyncTaskTest extends InstrumentationTestCase implements AsyncResponse {
 
@@ -25,8 +26,11 @@ public class AsyncTaskTest extends InstrumentationTestCase implements AsyncRespo
         super.tearDown();
     }
 
+    /**
+     * Kick off the AsyncTask.
+     * @throws Throwable
+     */
     public final void testSuccessfulFetch() throws Throwable {
-        // create  a signal to let us know when our task is done.
         new EndpointsAsyncTask().execute(new Pair<AsyncResponse, Integer>(this, 1));
         }
 
