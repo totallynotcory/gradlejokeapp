@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="8dp"
+        style="@style/JokeTheme"
         android:textAppearance="?android:textAppearanceLarge"
         />
 
