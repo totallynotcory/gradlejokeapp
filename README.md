@@ -1,4 +1,5 @@
-# Gradle for Android Project -- Udacity Android Nanodegree
+# Gradle for Android Project 
+## Udacity Android Nanodegree
 
 In this project, I created an app with multiple flavors that use
 multiple libraries and Google Could Endpoints. The app consists
