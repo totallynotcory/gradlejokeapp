@@ -15,15 +15,20 @@
         android:layout_centerInParent="true"
         android:elevation="8dp"
         android:padding="8dp"
-        android:background="@color/primary_light">
-    <TextView
-        android:id="@+id/joke_part_1"
-        android:text="@string/joke_loader_not_working"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/JokeTheme"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="@drawable/scrim" />
+        <TextView
+            android:id="@+id/joke_part_1"
+            android:text="@string/joke_loader_not_working"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/JokeTheme"
+            android:textAppearance="?android:textAppearanceLarge"
+            />
 
     </FrameLayout>
 
@@ -31,7 +36,7 @@
         android:id="@+id/joke_part_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/joke_holder"
         android:padding="8dp"
         android:textAppearance="?android:textAppearanceMedium"
